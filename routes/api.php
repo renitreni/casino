@@ -21,6 +21,8 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
+    Route::get('agent-list', [UserController::class, 'getAgents'])->name('api.agent-list');
+
     Route::post('check-token', [LoginController::class, 'checkToken'])->name('check-token');
     Route::post('agent-table', [UserController::class, 'agentTable'])->name('api.agent-table');
     Route::post('player-table', [UserController::class, 'playerTable'])->name('api.player-table');
@@ -35,6 +37,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('edit/admin', [UserController::class, 'updateAdmin'])->name('api.update.admin');
 
     Route::post('referral-table', [ReferralController::class, 'referralTable'])->name('api.referral-table');
+    Route::post('create/referral', [ReferralController::class, 'createReferral'])->name('api.create.referral');
+    Route::delete('delete/referral/{referral}', [ReferralController::class, 'deleteReferral'])->name('api.delete.referral');
 
     Route::delete('delete/agent/{user}', [UserController::class, 'deleteAgent'])->name('api.delete.agent');
     Route::delete('delete/player/{user}', [UserController::class, 'deletePlayer'])->name('api.delete.player');

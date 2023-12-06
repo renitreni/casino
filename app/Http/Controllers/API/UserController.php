@@ -106,4 +106,15 @@ class UserController extends Controller
 
         return ['message' => 'success'];
     }
+
+    public function getAgents()
+    {
+        $agents = User::query()
+            ->selectRaw('id,name')
+            ->whereHas('roles', fn ($q) => $q->where('name', 'agent'))
+            ->doesntHave('referral')
+            ->get();
+
+        return response()->json($agents);
+    }
 }
