@@ -57,7 +57,7 @@
             <strong>Company &copy; 2023</strong>
             All rights reserved.
             <div class="float-right d-none d-sm-inline-block">
-                {{ config('app.env') }}
+                <strong>Version</strong> {{ config('app.env') }}
             </div>
         </footer>
 
