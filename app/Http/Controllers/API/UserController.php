@@ -13,7 +13,8 @@ class UserController extends Controller
 {
     public function agentTable()
     {
-        $user = User::with('roles')->whereHas('roles', fn ($q) => $q->where('name', 'agent'));
+        $user = User::with('roles')
+            ->whereHas('roles', fn ($q) => $q->where('name', 'agent'));
 
         return DataTables::of($user)
             ->addColumn('actions', function ($value) {
@@ -24,7 +25,11 @@ class UserController extends Controller
 
     public function playerTable()
     {
-        $user = User::with('roles')->whereHas('roles', fn ($q) => $q->where('name', 'player'));
+        $user = User::with('roles')
+            ->whereHas('roles', fn ($q) => $q->where('name', 'player'))
+            ->when(request()->get('global_filter') == 'filter-deleted-users', function ($q) {
+                $q->withTrashed()->whereNotNull('deleted_at');
+            });
 
         return DataTables::of($user)
             ->addColumn('actions', function ($value) {

@@ -27,6 +27,37 @@
     <section class="content">
         <div class="container-fluid">
             <div class="card">
+                <div class="card-header">
+                    <div class="card-title">Filters</div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-auto">
+                            <div class="form-check">
+                                <input type="radio" name="radio-filter" value="filter-available-users" checked>
+                                <label>
+                                    Available Users
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <div class="form-check">
+                                <input type="radio" name="radio-filter" value="filter-deleted-users">
+                                <label>
+                                    Deleted Users
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card">
                 <div class="card-body">
                     <table id="user-table" class="table"></table>
                 </div>
@@ -160,6 +191,9 @@
 @push('scripts')
     <script>
         $(document).ready(function() {
+            $('[name="radio-filter"]').change(function() {
+                table.draw();
+            });
 
             $(document).on('click', '.deleteMdlBtn', function() {
                 data = $.parseJSON($(this).attr('data'));
@@ -311,7 +345,10 @@
                         xhr.setRequestHeader('Authorization', localStorage.getItem('bearer-token'));
                     },
                     url: '{{ route('api.player-table') }}',
-                    type: 'POST'
+                    type: 'POST',
+                    data:  function ( d ) {
+                        d.global_filter = $('[name="radio-filter"]:checked').val();
+                    }
                 },
                 order: [
                     [1, 'asc']
