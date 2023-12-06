@@ -49,6 +49,13 @@
                         <p>Admins</p>
                     </a>
                 </li>
+                <li class="nav-header">Referral Management</li>
+                <li class="nav-item">
+                    <a href="{{ route('referrals') }}" class="nav-link @if(Route::getCurrentRoute()->uri == 'referrals') active @endif">
+                        <i class="nav-icon fas fa-users"></i>
+                        <p>Referral</p>
+                    </a>
+                </li>
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

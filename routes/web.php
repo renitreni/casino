@@ -22,3 +22,4 @@ Route::get('/dashboard', fn () => view('project-one.dashboard'))->name('dashboar
 Route::get('/agents', fn () => view('project-one.agents'))->name('agents');
 Route::get('/players', fn () => view('project-one.players'))->name('players');
 Route::get('/admins', fn () => view('project-one.admins'))->name('admins');
+Route::get('/referrals', fn () => view('project-one.referral'))->name('referrals');

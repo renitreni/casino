@@ -60,7 +60,7 @@
                             <input type="email" id="email-edit" class="form-control">
                             <span id="email-error-edit" class="text-danger"></span>
                         </div>
-                        <div class="col-12 mb-2">
+                        <div class="col-12 mb-2" hidden>
                             <label>Role</label>
                             <select id="role-edit" class="form-control">
                                 <option value="agent">Agent</option>

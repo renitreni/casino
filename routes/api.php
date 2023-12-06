@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\LoginController;
+use App\Http\Controllers\API\ReferralController;
 use App\Http\Controllers\API\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -32,6 +33,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('edit/agent', [UserController::class, 'updateAgent'])->name('api.update.agent');
     Route::put('edit/player', [UserController::class, 'updatePlayer'])->name('api.update.player');
     Route::put('edit/admin', [UserController::class, 'updateAdmin'])->name('api.update.admin');
+
+    Route::post('referral-table', [ReferralController::class, 'referralTable'])->name('api.referral-table');
 
     Route::delete('delete/agent/{user}', [UserController::class, 'deleteAgent'])->name('api.delete.agent');
     Route::delete('delete/player/{user}', [UserController::class, 'deletePlayer'])->name('api.delete.player');

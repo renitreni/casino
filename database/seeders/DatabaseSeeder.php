@@ -48,11 +48,5 @@ class DatabaseSeeder extends Seeder
         foreach ($agents as $agent) {
             $agent->assignRole($agentRole);
         }
-
-        // $playerRole = Role::create(['name' => 'player']);
-        // $users = User::factory(10)->create();
-        // foreach ($users as $user) {
-        //     $user->assignRole($playerRole);
-        // }
     }
 }
