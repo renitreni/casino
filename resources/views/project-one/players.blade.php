@@ -368,6 +368,10 @@
                         title: 'E-mail'
                     },
                     {
+                        data: 'phone',
+                        title: 'Phone'
+                    },
+                    {
                         bSortable: false,
                         bSearchable: false,
                         data: function(value) {

@@ -17,6 +17,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::post('login/csrf', [LoginController::class, 'authenticate'])->name('authenticate');
+Route::post('delete/register/member', [ReferralController::class, 'registerMember'])->name('api.register.referral');
+
 Route::middleware('auth:sanctum')->group(function () {
 
     Route::post('logout', [LoginController::class, 'logout'])->name('logout');

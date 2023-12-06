@@ -23,3 +23,4 @@ Route::get('/agents', fn () => view('project-one.agents'))->name('agents');
 Route::get('/players', fn () => view('project-one.players'))->name('players');
 Route::get('/admins', fn () => view('project-one.admins'))->name('admins');
 Route::get('/referrals', fn () => view('project-one.referral'))->name('referrals');
+Route::get('/register/referral/{code}', fn () => view('project-one.referral-register'))->name('referral.register');

@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\RegisterMemberRequest;
 use App\Models\Referral;
 use App\Models\User;
+use App\Services\UserService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Yajra\DataTables\DataTables;
@@ -16,6 +18,9 @@ class ReferralController extends Controller
         $referral = Referral::with('agent')->get();
 
         return DataTables::of($referral)
+            ->editColumn('referral_link', function($value){
+                return route('referral.register', ['code' => $value->referral_link]);
+            })
             ->addColumn('actions', function ($value) {
                 return view('project-one.partials.action-referral-btn', ['data' => $value]);
             })
@@ -41,5 +46,12 @@ class ReferralController extends Controller
         ]);
 
         return ['message' => 'success'];
+    }
+
+    public function registerMember(RegisterMemberRequest $request, UserService $userService)
+    {
+        $userService->storeByRole($request->validated(), 'player', $request->getClientIp());
+
+        dd($request->input());
     }
 }

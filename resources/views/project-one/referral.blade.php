@@ -185,6 +185,7 @@
                     },
                     {
                         data: 'referral_link',
+                        name: 'referral_link',
                         title: 'Referral Link'
                     },
                     {
