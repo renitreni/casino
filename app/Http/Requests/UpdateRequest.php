@@ -26,7 +26,7 @@ class UpdateRequest extends FormRequest
             'role' => 'required',
             'password_update' => 'required',
             'name' => 'required|max:100',
-            'email' => 'required|email|unique:users,email,' . $this->id,
+            'email' => 'required|email|unique:users,email,'.$this->id,
             'password' => 'required_if:password_update,true|confirmed',
         ];
     }

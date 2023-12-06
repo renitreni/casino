@@ -22,8 +22,8 @@ class UserService
     {
         $user = User::find($validated['id'])
             ->fill([
-                "email" => $validated['email'],
-                "name" => $validated['name'],
+                'email' => $validated['email'],
+                'name' => $validated['name'],
             ]);
         $user->save();
 
@@ -31,7 +31,7 @@ class UserService
 
         if ($validated['password_update'] == 'true') {
             $user = User::find($validated['id'])
-                ->fill(["password" => bcrypt($validated['password'])]);
+                ->fill(['password' => bcrypt($validated['password'])]);
             $user->save();
         }
 

@@ -7,9 +7,6 @@ use App\Http\Requests\StoreRequest;
 use App\Http\Requests\UpdateRequest;
 use App\Models\User;
 use App\Services\UserService;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
-use Spatie\Permission\Models\Role;
 use Yajra\DataTables\DataTables;
 
 class UserController extends Controller
@@ -92,18 +89,21 @@ class UserController extends Controller
     public function deleteAgent(User $user)
     {
         $user->delete();
+
         return ['message' => 'success'];
     }
 
     public function deletePlayer(User $user)
     {
         $user->delete();
+
         return ['message' => 'success'];
     }
 
     public function deleteAdmin(User $user)
     {
         $user->delete();
+
         return ['message' => 'success'];
     }
 }

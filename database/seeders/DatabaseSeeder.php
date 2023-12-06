@@ -3,6 +3,9 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Referral;
+use App\Models\ReferralMember;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
@@ -23,16 +26,33 @@ class DatabaseSeeder extends Seeder
         ]);
         $user->assignRole($adminRole);
 
+        $playerRole = Role::create(['name' => 'player']);
         $agentRole = Role::create(['name' => 'agent']);
-        $users = User::factory(10)->create();
-        foreach($users as $user) {
-            $user->assignRole($agentRole);
+        $agents = User::factory(10)->has(
+            Referral::factory()
+                ->has(
+                    ReferralMember::factory(10)
+                        ->afterCreating(
+                            function ($referralMember) use ($playerRole) {
+                                User::factory()
+                                    ->afterCreating(function ($user) use ($playerRole, $referralMember) {
+                                        $referralMember->update(['member_id' => $user->id]);
+                                        $user->assignRole($playerRole);
+                                    })
+                                    ->create();
+                            }
+                        )
+                )
+        )->create();
+
+        foreach ($agents as $agent) {
+            $agent->assignRole($agentRole);
         }
 
-        $playerRole = Role::create(['name' => 'player']);
-        $users = User::factory(10)->create();
-        foreach($users as $user) {
-            $user->assignRole($playerRole);
-        }
+        // $playerRole = Role::create(['name' => 'player']);
+        // $users = User::factory(10)->create();
+        // foreach ($users as $user) {
+        //     $user->assignRole($playerRole);
+        // }
     }
 }

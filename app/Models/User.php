@@ -25,7 +25,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'ip_address'
+        'ip_address',
     ];
 
     /**
@@ -47,4 +47,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function referral()
+    {
+        return $this->hasOne(Referral::class, 'agent_id');
+    }
 }
